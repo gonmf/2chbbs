@@ -1,5 +1,5 @@
 <?php
-require "h.php";
+require "header.php";
 if(isset($_GET['b']))
 	$boardid = intval($_GET['b']);
 else
@@ -16,7 +16,7 @@ $boardname = $row[0];
 <html>
 <head>
 <link rel="shortcut icon" href="favicon.ico">
-<link rel="stylesheet" href="s.css"/>
+<link rel="stylesheet" href="stylesheet.css"/>
 <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
 <meta http-equiv="pragma" content="no-cache">
 <title><?php echo $boardname; ?></title>
@@ -26,13 +26,13 @@ $boardname = $row[0];
 <table>
 <tr>
 <td>
-<a style="margin-bottom: 18px;" href="b.php?b=<?php echo $boardid ?>">Return</a>
+<a style="margin-bottom: 18px;" href="board.php?b=<?php echo $boardid ?>">Return</a>
 <br/>
 <br/>
 <?php
 $rs = mysql_query("select threads.id, subject, count(threads.id) from threads, posts where threads.boardid = " . $boardid . " and threads.id = posts.threadid group by threads.id order by max(posts.dat) desc");
 while(($row = mysql_fetch_row($rs)))
-	echo "<a href=\"t.php?t=" . $row[0] . "&b=" . $boardid . "\">" . sub_clean($row[1]) . " (" . $row[2] . ")</a>&nbsp;&nbsp;&nbsp;";
+	echo "<a href=\"thread.php?t=" . $row[0] . "&b=" . $boardid . "\">" . sub_clean($row[1]) . " (" . $row[2] . ")</a>&nbsp;&nbsp;&nbsp;";
 if(mysql_num_rows($rs) == 0)
 	echo "<center>No threads found.</center>";
 mysql_close($con);

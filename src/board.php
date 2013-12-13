@@ -1,5 +1,5 @@
 <?php
-require "h.php";
+require "header.php";
 if(isset($_GET['b']))
 	$boardid = intval($_GET['b']);
 else
@@ -31,7 +31,7 @@ if(isset($_POST['captcha']) && isset($_POST['msg']) && isset($_POST['subject']))
 					$row = mysql_fetch_row($rs);
 					$threadid = $row[0];
 					mysql_query("insert into posts(threadid, boardid, author, msg, dat) values(" . $threadid . ", " . $boardid . ", '" . gen_id() . "', '" . $msg . "', NOW())");
-					header("Location: t.php?b=" . $boardid . "&t=" . $threadid);
+					header("Location: thread.php?b=" . $boardid . "&t=" . $threadid);
 				}
 			}
 		}
@@ -51,7 +51,7 @@ $notice = $row[1];
 <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
 <meta http-equiv="pragma" content="no-cache">
 <title><?php echo $boardname; ?></title>
-<link rel="stylesheet" href="s.css"/>
+<link rel="stylesheet" href="stylesheet.css"/>
 </head>
 <body>
 <center>
@@ -74,41 +74,41 @@ while(($row = mysql_fetch_row($rs))){
 	echo "<a href='#" . $num . "'>" . $num . ": " . sub_clean($row[1]) . " (" . $row[2] . ")</a>&nbsp;&nbsp;&nbsp;";
 	$rs2 = mysql_query("select author, msg, dat from posts where threadid=" . $row[0] . " and boardid=" . $boardid . " order by id");
 	$postcount = mysql_num_rows($rs2);
-	$body .= "<table><tr><td colspan=\"2\" style=\"text-align: left;\"><a name=\"" . $num . "\"></a><b>[" . $num . ":" . $postcount . "]</b>&nbsp;&nbsp;&nbsp;<a href=\"t.php?b=" . $boardid . "&t=" . $row[0] . "\" style=\"color: red; font-size: 20px; font-weight: bold;\">" . sub_clean($row[1]) . "</a></td><td align=\"right\"><a href=\"#menu\">¡</a> <a href=\"#";
+	$body .= "<table><tr><td colspan=\"2\" style=\"text-align: left;\"><a name=\"" . $num . "\"></a><b>[" . $num . ":" . $postcount . "]</b>&nbsp;&nbsp;&nbsp;<a href=\"t.php?b=" . $boardid . "&t=" . $row[0] . "\" style=\"color: red; font-size: 20px; font-weight: bold;\">" . sub_clean($row[1]) . "</a></td><td align=\"right\"><a href=\"#menu\">ÂÂ¡</a> <a href=\"#";
 	if($num == 1)
-		$body .= $showthreads . "\">£</a> <a href=\"#2\">¥</a></td></tr><tr><td colspan=\"3\"><dl>";
+		$body .= $showthreads . "\">ÂÂ£</a> <a href=\"#2\">ÂÂ¥</a></td></tr><tr><td colspan=\"3\"><dl>";
 	else
 		if($num == $showthreads)
-			$body .= ($showthreads - 1) . "\">£</a> <a href=\#1\">¥</a></td></tr><tr><td colspan=\"3\"><dl>";
+			$body .= ($showthreads - 1) . "\">ÂÂ£</a> <a href=\#1\">ÂÂ¥</a></td></tr><tr><td colspan=\"3\"><dl>";
 		else
-			$body .= ($num - 1) . "\">£</a> <a href=\"#" . ($num + 1) . "\">¥</a></td></tr><tr><td colspan=\"3\"><dl>";
+			$body .= ($num - 1) . "\">ÂÂ£</a> <a href=\"#" . ($num + 1) . "\">ÂÂ¥</a></td></tr><tr><td colspan=\"3\"><dl>";
 	$num2 = 0;
 	if($postcount < 7){
 		while(($row2 = mysql_fetch_row($rs2)))
-			$body .= "<dt>" . ++$num2 . " IDF <font color=\"green\">" . substr($row2[0], 0, 10) . "</font>&nbsp;&nbsp;&nbsp;DateF " . $row2[2] . "</dt><dd>" . msg_clean_show($row2[1]) . "</dd>";
+			$body .= "<dt>" . ++$num2 . " IDÂF <font color=\"green\">" . substr($row2[0], 0, 10) . "</font>&nbsp;&nbsp;&nbsp;DateÂF " . $row2[2] . "</dt><dd>" . msg_clean_show($row2[1]) . "</dd>";
 	}else{
 		$row2 = mysql_fetch_row($rs2);
-		$body .= "<dt>" . ++$num2 . " IDF <font color=\"green\">" . substr($row2[0], 0, 10) . "</font>&nbsp;&nbsp;&nbsp;DateF " . $row2[2] . "</dt><dd>" . msg_clean_show($row2[1]) . "</dd>";
+		$body .= "<dt>" . ++$num2 . " IDÂF <font color=\"green\">" . substr($row2[0], 0, 10) . "</font>&nbsp;&nbsp;&nbsp;DateÂF " . $row2[2] . "</dt><dd>" . msg_clean_show($row2[1]) . "</dd>";
 		while($postcount - $num2++ > $msgpreviews)
 			$row2 = mysql_fetch_row($rs2);
 		$body .= "<a href=\"t.php?b=" . $boardid . "&t=" . $row[0] . "\">Read this thread from the beginning</a><br/><br/>";
 		while(($row2 = mysql_fetch_row($rs2)))
-			$body .= "<dt>" . ++$num2 . " IDF <font color=\"green\">" . substr($row2[0], 0, 10) . "</font>&nbsp;&nbsp;&nbsp;DateF " . $row2[2] . "</dt><dd>" . msg_clean_show($row2[1]) . "</dd>";
+			$body .= "<dt>" . ++$num2 . " IDÂF <font color=\"green\">" . substr($row2[0], 0, 10) . "</font>&nbsp;&nbsp;&nbsp;DateÂF " . $row2[2] . "</dt><dd>" . msg_clean_show($row2[1]) . "</dd>";
 	}
 	$body .= "</dl></td></tr></table>";
 }
 if($num == 0)
 	echo "<center>No threads found. You can start your own using the form bellow or <a href=\"index.php\">return</a>.</center></td></tr></table>";
 else
-	echo "<span style=\"display: block; text-align: right;\"><a href=\"index.php\">Return</a>&nbsp;&nbsp;&nbsp;<a href=\"a.php?b=" . $boardid . "\">All Threads</a></span></td></tr></table>" . $body;
+	echo "<span style=\"display: block; text-align: right;\"><a href=\"index.php\">Return</a>&nbsp;&nbsp;&nbsp;<a href=\"all.php?b=" . $boardid . "\">All Threads</a></span></td></tr></table>" . $body;
 ?>
 <form method="POST">
 <table style="padding-bottom: 15px;">
 <?php
 if($num > 0)
-	echo "<tr><td colspan=\"3\" align=\"right\"><a href=\"#menu\">¡</a> <a href=\"#" . $num . "\">£</a> <a href=\"#1\">¥</a></td></tr>";
+	echo "<tr><td colspan=\"3\" align=\"right\"><a href=\"#menu\">ÂÂ¡</a> <a href=\"#" . $num . "\">ÂÂ£</a> <a href=\"#1\">ÂÂ¥</a></td></tr>";
 ?>
-<tr><td align="right">Subject</td><td colspan="2"><input name="subject" size="40" type="text" value="<?php if(isset($subject)) echo $subject; ?>">@<input value="Create new thread" name="submit" type="submit"></td></tr><tr><td align="right"><img src="c.php?rand=<?php echo rand(); ?>" onclick="refreshCaptcha();" id="captchaimg"><br/><input id="6_letters_code" name="captcha" size="16" type="text"></td><td colspan="2"><textarea rows="5" nowrap="nowrap" cols="50" wrap="OFF" name="msg"><?php if(isset($msg)) echo $msg; ?></textarea></td></tr>
+<tr><td align="right">Subject</td><td colspan="2"><input name="subject" size="40" type="text" value="<?php if(isset($subject)) echo $subject; ?>">Â@<input value="Create new thread" name="submit" type="submit"></td></tr><tr><td align="right"><img src="captcha.php?rand=<?php echo rand(); ?>" onclick="refreshCaptcha();" id="captchaimg"><br/><input id="6_letters_code" name="captcha" size="16" type="text"></td><td colspan="2"><textarea rows="5" nowrap="nowrap" cols="50" wrap="OFF" name="msg"><?php if(isset($msg)) echo $msg; ?></textarea></td></tr>
 </table>
 </form>
 </center>
