@@ -74,7 +74,7 @@ while(($row = mysql_fetch_row($rs))){
 	echo "<a href='#" . $num . "'>" . $num . ": " . sub_clean($row[1]) . " (" . $row[2] . ")</a>&nbsp;&nbsp;&nbsp;";
 	$rs2 = mysql_query("select author, msg, dat from posts where threadid=" . $row[0] . " and boardid=" . $boardid . " order by id");
 	$postcount = mysql_num_rows($rs2);
-	$body .= "<table><tr><td colspan=\"2\" style=\"text-align: left;\"><a name=\"" . $num . "\"></a><b>[" . $num . ":" . $postcount . "]</b>&nbsp;&nbsp;&nbsp;<a href=\"t.php?b=" . $boardid . "&t=" . $row[0] . "\" style=\"color: red; font-size: 20px; font-weight: bold;\">" . sub_clean($row[1]) . "</a></td><td align=\"right\"><a href=\"#menu\">¡</a> <a href=\"#";
+	$body .= "<table><tr><td colspan=\"2\" style=\"text-align: left;\"><a name=\"" . $num . "\"></a><b>[" . $num . ":" . $postcount . "]</b>&nbsp;&nbsp;&nbsp;<a href=\"thread.php?b=" . $boardid . "&t=" . $row[0] . "\" style=\"color: red; font-size: 20px; font-weight: bold;\">" . sub_clean($row[1]) . "</a></td><td align=\"right\"><a href=\"#menu\">¡</a> <a href=\"#";
 	if($num == 1)
 		$body .= $showthreads . "\">£</a> <a href=\"#2\">¥</a></td></tr><tr><td colspan=\"3\"><dl>";
 	else
@@ -91,7 +91,7 @@ while(($row = mysql_fetch_row($rs))){
 		$body .= "<dt>" . ++$num2 . " IDF <font color=\"green\">" . substr($row2[0], 0, 10) . "</font>&nbsp;&nbsp;&nbsp;DateF " . $row2[2] . "</dt><dd>" . msg_clean_show($row2[1]) . "</dd>";
 		while($postcount - $num2++ > $msgpreviews)
 			$row2 = mysql_fetch_row($rs2);
-		$body .= "<a href=\"t.php?b=" . $boardid . "&t=" . $row[0] . "\">Read this thread from the beginning</a><br/><br/>";
+		$body .= "<a href=\"thread.php?b=" . $boardid . "&t=" . $row[0] . "\">Read this thread from the beginning</a><br/><br/>";
 		while(($row2 = mysql_fetch_row($rs2)))
 			$body .= "<dt>" . ++$num2 . " IDF <font color=\"green\">" . substr($row2[0], 0, 10) . "</font>&nbsp;&nbsp;&nbsp;DateF " . $row2[2] . "</dt><dd>" . msg_clean_show($row2[1]) . "</dd>";
 	}
