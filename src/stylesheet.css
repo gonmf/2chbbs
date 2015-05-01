@@ -14,6 +14,9 @@ a:active{
 	color: blue;
 	text-decoration: none;
 }
+a.menua{
+	text-decoration: underline;
+}
 table{
 	background-color: white;
 	color: black;
