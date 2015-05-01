@@ -68,9 +68,9 @@ $rs2 = mysql_query("select author, msg, dat from posts where threadid=" . $threa
 $rowcount = mysql_num_rows($rs2);
 $num2 = 1;
 while(($row2 = mysql_fetch_row($rs2)))
-	echo "<dt>" . $num2++ . " IDÅF <font color=\"green\">" . substr($row2[0], 0, 10) . "</font>&nbsp;&nbsp;&nbsp;DateÅF " . $row2[2] . "</dt><dd>" . msg_clean_show($row2[1]) . "</dd>";
+	echo "<dt>" . $num2++ . " ID: <font color=\"green\">" . substr($row2[0], 0, 10) . "</font>&nbsp;&nbsp;&nbsp;Date: " . $row2[2] . "</dt><dd>" . msg_clean_show($row2[1]) . "</dd>";
 ?>
-<dd><form method="POST" style="margin-top: 25px;"><tfoot><tr><td align="right"><img src="captcha.php?rand=<?php echo rand(); ?>" onclick="refreshCaptcha();" id="captchaimg"><br/><input id="6_letters_code" name="captcha" size="16" type="text"></td><td><textarea rows="5" cols="50" name="msg"><?php if(isset($msg)) echo $msg; ?></textarea><br/><input value="Submit" name="submit" type="submit"></td></tr></tfoot></form></dd></dl></td></tr></table>
+<dd><form method="POST" style="margin-top: 25px;"><tfoot><tr><td align="right"><img src="captcha.php?rand=<?php echo rand(); ?>" onclick="refreshCaptcha();" id="captchaimg"><br/><input id="6_letters_code" name="captcha" size="16" type="text" required="true"></td><td><textarea rows="5" cols="50" name="msg" required="true"><?php if(isset($msg)) echo $msg; ?></textarea><br/><input value="Submit" name="submit" type="submit"></td></tr></tfoot></form></dd></dl></td></tr></table>
 </center>
 </body>
 </html>

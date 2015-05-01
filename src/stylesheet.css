@@ -40,6 +40,8 @@ dd{
 	margin-bottom: 10px;
 }
 textarea{
-	resize: vertical;
+	outline: none;
+	resize: both;
 	width: auto;
+	overflow: auto;
 }

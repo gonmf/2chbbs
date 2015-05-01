@@ -111,7 +111,7 @@ else
 if($num > 0)
 	echo "<tr><td colspan=\"3\" align=\"right\"><a href=\"#menu\">&#9632;</a> <a href=\"#" . $num . "\">&#9650;</a> <a href=\"#1\">&#9660;</a></td></tr>";
 ?>
-<tr><td align="right">Subject</td><td colspan="2"><input name="subject" size="40" type="text" value="<?php if(isset($subject)) echo $subject; ?>"> <input value="Create new thread" name="submit" type="submit"></td></tr><tr><td align="right"><img src="captcha.php?rand=<?php echo rand(); ?>" onclick="refreshCaptcha();" id="captchaimg"><br/><input id="6_letters_code" name="captcha" size="16" type="text"></td><td colspan="2"><textarea rows="5" nowrap="nowrap" cols="50" wrap="soft" name="msg"><?php if(isset($msg)) echo $msg; ?></textarea></td></tr>
+<tr><td align="right">Subject</td><td colspan="2"><input name="subject" size="40" type="text" value="<?php if(isset($subject)) echo $subject; ?>" required="true"> <input value="Create new thread" name="submit" type="submit"></td></tr><tr><td align="right"><img src="captcha.php?rand=<?php echo rand(); ?>" onclick="refreshCaptcha();" id="captchaimg"><br/><input id="6_letters_code" name="captcha" size="16" type="text" required="true"></td><td colspan="2"><textarea rows="5" cols="50" name="msg" required="true"><?php if(isset($msg)) echo $msg; ?></textarea></td></tr>
 </table>
 </form>
 </center>
